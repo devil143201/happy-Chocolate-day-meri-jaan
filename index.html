@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Sadia 🍫💖</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Comic Sans MS', cursive;
+  background:linear-gradient(135deg,#ff4d6d,#3a0ca3);
+  overflow:hidden;
+  color:white;
+}
+
+/* 💌 Card */
+.card{
+  background:rgba(0,0,0,0.55);
+  padding:30px;
+  border-radius:22px;
+  text-align:center;
+  box-shadow:0 0 35px rgba(0,0,0,0.7);
+  max-width:90%;
+  animation:fadeIn 1s ease;
+}
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(0.8);}
+  to{opacity:1;transform:scale(1);}
+}
+
+/* 💖 Glow */
+.glow{
+  animation:glow 1.5s infinite;
+}
+@keyframes glow{
+  0%{box-shadow:0 0 15px #ff4d6d;}
+  50%{box-shadow:0 0 35px #ff85a1;}
+  100%{box-shadow:0 0 15px #ff4d6d;}
+}
+
+/* ✨ Neon */
+.neon{
+  color:#ffb3c6;
+  text-shadow:0 0 8px #ff4d6d,0 0 20px #ff4d6d;
+}
+
+p{min-height:60px;font-size:17px}
+
+/* Buttons */
+button{
+  padding:12px 28px;
+  margin:10px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+}
+
+/* 💓 YES */
+#yes{
+  background:#ff4d6d;
+  color:white;
+  animation:heartbeat 1.3s infinite;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1);}
+  25%{transform:scale(1.1);}
+  50%{transform:scale(1);}
+  75%{transform:scale(1.15);}
+  100%{transform:scale(1);}
+}
+
+/* 😢 NO */
+#no{
+  background:#333;
+  color:white;
+}
+
+/* 🍫 Chocolate Rain */
+.choco{
+  position:absolute;
+  top:-40px;
+  font-size:26px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* 💕 Floating Hearts */
+.heart{
+  position:absolute;
+  font-size:22px;
+  animation:float 5s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-120vh);opacity:0;}
+}
+
+/* 💔 Sad Shake */
+@keyframes sadShake{
+  0%{transform:translateX(0);}
+  25%{transform:translateX(-6px);}
+  50%{transform:translateX(6px);}
+  75%{transform:translateX(-6px);}
+  100%{transform:translateX(0);}
+}
+.sad{animation:sadShake 0.5s;}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <h1>🍫 Hey <span class="neon">Sadia</span> 💕</h1>
+  <p id="typing"></p>
+  <button id="yes" onclick="yes()">Yes 😍</button>
+  <button id="no" onclick="no()">No 😢</button>
+</div>
+
+<script>
+/* 🍫 Chocolate Rain */
+for(let i=0;i<25;i++){
+  let c=document.createElement("div");
+  c.className="choco";
+  c.innerHTML="🍫";
+  c.style.left=Math.random()*100+"vw";
+  c.style.animationDuration=(3+Math.random()*5)+"s";
+  document.body.appendChild(c);
+}
+
+/* 💕 Hearts background */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💕";
+  h.style.left=Math.random()*100+"vw";
+  h.style.bottom="-20px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+},400);
+
+/* ✍️ Typing first line */
+let text="Sadia 🤍 kya tum meri zindagi ki sabse special chocolate banogi? 🍫💕";
+let i=0;
+(function type(){
+  if(i<text.length){
+    typing.innerHTML+=text.charAt(i++);
+    setTimeout(type,45);
+  }
+})();
+
+/* 😢 NO logic */
+let noCount=0;
+const sadLines=[
+  "Sadia… thoda sa dil toot gaya 💔",
+  "It hurts… par tumhari khushi zaroori hai 😢",
+  "Shayad meri feelings hi zyada thi 💔",
+  "Dil maanta nahi… par respect karta hoon 🤍"
+];
+function no(){
+  card.classList.add("sad");
+  card.innerHTML=`
+    <div style="font-size:55px;">💔</div>
+    <p>${sadLines[noCount%sadLines.length]}</p>
+    <button id="yes" onclick="yes()">Yes 😍</button>
+    <button id="no" onclick="no()">No 😢</button>
+  `;
+  noCount++;
+}
+
+/* 😍 YES FLOW */
+function yes(){
+  card.classList.add("glow");
+  heartBlast();
+  card.innerHTML=`
+    <h1>💖 Thank You <span class="neon">Sadia</span></h1>
+    <p id="line"></p>
+    <button onclick="next1()">Next 👉</button>
+  `;
+  typeLine("Tumhara YES meri zindagi ka sabse khoobsurat moment hai 🤍✨");
+}
+
+/* Typing helper */
+function typeLine(t){
+  let j=0,el=document.getElementById("line");
+  (function tt(){
+    if(j<t.length){
+      el.innerHTML+=t.charAt(j++);
+      setTimeout(tt,45);
+    }
+  })();
+}
+
+/* Hearts blast */
+function heartBlast(){
+  for(let k=0;k<20;k++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=(40+Math.random()*20)+"vw";
+    h.style.bottom="40vh";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),3000);
+  }
+}
+
+/* NEXT 1 */
+function next1(){
+  card.innerHTML=`
+    <h1>💖 Ek Chhoti Si Baat 💖</h1>
+    <p>
+      Agar tum dil se YES keh rahi ho 🤍<br>
+      aur agar tum comfortable ho 😊<br><br>
+      to apni ek simple si photo bhej do na 📸<br>
+      sirf agar tumhara mann ho 💕
+    </p>
+    <button onclick="next2()">Next 👉</button>
+  `;
+}
+
+/* NEXT 2 */
+function next2(){
+  card.innerHTML=`
+    <h1>🍫 Happy Chocolate Day ❤️</h1>
+    <p>
+      Jaise chocolate muh me jaate hi melt ho jaati hai,<br>
+      waise hi tum meri zindagi me aake<br>
+      sab tension melt kar deti ho 🤍<br><br>
+      Happy Chocolate Day, jaan ❤️
+    </p>
+    <button onclick="next3()">Next 👉</button>
+  `;
+}
+
+/* NEXT 3 */
+function next3(){
+  card.innerHTML=`
+    <h1>🍫 Chocolate Day Special 😘</h1>
+    <p>
+      Tumhari baatein chocolate syrup ki tarah hain…<br>
+      thodi si bhi mil jaaye toh<br>
+      poora din meetha ho jaata hai 🤍<br><br>
+      Happy Chocolate Day sweetheart 😘🍫
+    </p>
+    <button onclick="next4()">Next 👉</button>
+  `;
+}
+
+/* NEXT 4 – FINAL */
+function next4(){
+  card.innerHTML=`
+    <h1>🍫 From My Heart 😌❤️</h1>
+    <p>
+      Kaash main chocolate hota…<br>
+      aur tum mujhe apne haathon se sambhaal kar rakhti 🤍<br>
+      kyunki main sirf tumhara hoon 🫶<br><br>
+      Happy Chocolate Day 😌🍫❤️
+    </p>
+    <div style="font-size:50px;">🍫❤️🍫</div>
+  `;
+}
+</script>
+
+</body>
+</html>
